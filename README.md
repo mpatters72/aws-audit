@@ -8,6 +8,7 @@
 ### Example usage
 ./cloudfront-subdomain-audit.py --profiles 'dev,stage,prod'
     ./cloudfront-subdomain-audit.py --profiles 'dev,stage,prod'
+    ```
     Retrieving CloudFront data from AWS profile: dev
     Retrieving CloudFront data from AWS profile: stage
     Retrieving CloudFront data from AWS profile: prod
@@ -15,3 +16,4 @@
     Auditing stage records
     Auditing prod records
     RISK: api.mikelikebike.com: alias: api2.mikelikebike.com not in our CF Distros
+    ```
