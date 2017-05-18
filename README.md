@@ -7,7 +7,6 @@
 
 ### Example usage
 ./cloudfront-subdomain-audit.py --profiles 'dev,stage,prod'
-    ./cloudfront-subdomain-audit.py --profiles 'dev,stage,prod'
     ```
     Retrieving CloudFront data from AWS profile: dev
     Retrieving CloudFront data from AWS profile: stage
