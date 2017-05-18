@@ -1,7 +1,11 @@
 # aws-audit
-AWS Audit Scripts - CloudFront subdomain takeover audit, etc
+## cloudfront-subdomain-audit.py
+    *  Find Route53 records pointing to CloudFront and whether or not all CF Aliases are registered
+    *  Note: All aliases in chain are found by DNS resolution and Cloudfront status checked by CIDR block
+    * Option to provide list of aws profiles from ~/.aws/credentials if desired
+    * [https://labs.detectify.com/2014/10/21/hostile-subdomain-takeover-using-herokugithubdesk-more/]
 
-# Checks all cloudfront domain registrations and route53 DNS records for specified AWS profiles to see if any at risk
+### Example usage
 ./cloudfront-subdomain-audit.py --profiles 'dev,stage,prod'
 
     ```
