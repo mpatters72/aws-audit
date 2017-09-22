@@ -4,6 +4,7 @@ import boto3
 import re
 import argparse
 import logging
+from botocore.client import Config
 
 # This script enables s3 bucket versioning and sets a LifeCycle policy to remove old versions after X days
 # Some AWS regions e.g. eu-central-1 need different parameters for s3v4, option to override that
@@ -82,9 +83,8 @@ def main ():
     bucket = args.bucket
     days = int(args.days)
     initLogging(loglevel)
-    # note if using new region like eu-central-1, will need s3v4 overrides
-    client = boto3.client('s3')
-    resource = boto3.resource('s3')
+    client=boto3.client('s3', config=Config(signature_version='s3v4'))
+    resource = boto3.resource('s3', config=Config(signature_version='s3v4'))
     bucketVersioning(resource, bucket,'enable')
     versionExpirePolicy(client, resource, bucket,days)
     

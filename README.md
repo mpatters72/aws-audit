@@ -18,6 +18,8 @@ Auditing stage records
 Auditing prod records
 RISK: api.mikelikebike.com: alias: api2.mikelikebike.com not in our CF Distros
 ```
+# s3 Scripts
+## Scripts for modifying/auditing s3 policies, versioning, and lifecycle rules
 
 ### s3ListPublic.py
 * List buckets with public ACLs or policies applied to s3 bucket
@@ -54,15 +56,11 @@ RISK: api.mikelikebike.com: alias: api2.mikelikebike.com not in our CF Distros
     ########## status after update ##########
     mikey-mikepatterson-test testkey testvalue
 
-# s3 LifeCycle Scripts
-## Scripts for modifying/auditing s3 policies, versioning and lifecycle rules
-## Caveat
-* While it's preferable to create s3 buckets and set policy in Cloudformation, these are used to audit update outside of that process
 ### s3EnableVersioning.py
+* While it's preferable to create s3 buckets and set policy in Cloudformation, these are used to audit update outside of that process
 * Enables versioning and sets number of days to keep old versions of files at whole bucket level
 * For build deployments, we override the "HEAD" file.  Probably a good idea to be able to roll-back to previous version if needed in emergency
 * Applying LifeCycle policies is risky as it applied at an all or nothing way.  So there it counts existing rules and will fail if existing policies are already on bucket.
-* Note Some newer regions (e.g. eu-central-1) have strange s3v4 rules, so boto connector has to be formed differently.
 * Assumes aws profile is set in ~/.aws/credentials
 * Usage:
     ```

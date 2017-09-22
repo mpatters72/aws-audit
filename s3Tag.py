@@ -4,6 +4,7 @@ import boto3
 import re
 import argparse
 import logging
+from botocore.client import Config
 
 # This script is designed to add tags to s3 buckets matching naming conventions
 # Because bucket_tagging.put overrides all existing tags, it checks for old ones and combines tags before putting
@@ -94,9 +95,8 @@ def main ():
     tagvalue = args.tagvalue
     loglevel = args.log
     initLogging(loglevel)
-    # note if using new region like eu-central-1, will need s3v4 overrides
-    client = boto3.client('s3')
-    resource = boto3.resource('s3')
+    client=boto3.client('s3', config=Config(signature_version='s3v4'))
+    resource = boto3.resource('s3', config=Config(signature_version='s3v4'))
     matching_buckets = findBuckets(resource, pattern)
     printTags(client, matching_buckets)
     if addtags in ['yes','y','Yes','YES']:

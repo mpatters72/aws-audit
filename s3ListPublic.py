@@ -5,6 +5,7 @@ import re
 import json
 import argparse
 import logging
+from botocore.client import Config
 
 # This script is designed audit for buckets with Public ACL or Policy that are Public
 # I took pieces from: https://whiletrue.run/2017/07/20/list-aws-s3-buckets-with-public-acls/
@@ -81,8 +82,8 @@ def main ():
     pattern = args.pattern
     loglevel = args.log
     initLogging(loglevel)
-    client = boto3.client('s3')
-    resource = boto3.resource('s3')
+    client=boto3.client('s3', config=Config(signature_version='s3v4'))
+    resource = boto3.resource('s3', config=Config(signature_version='s3v4'))
     findBuckets(client, resource, pattern)
     
 if __name__ == '__main__':
